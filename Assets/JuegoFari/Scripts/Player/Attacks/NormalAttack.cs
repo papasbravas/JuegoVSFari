@@ -1,0 +1,195 @@
+using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class NormalAttack : MonoBehaviour
+{
+    [Header("Daño y Hitbox")]
+    [SerializeField] public float singleDamage = 10f; // Daño hecho por un ataque normal
+    [SerializeField] public float multiDamage = 5f; // Daño hecho por un ataque múltiple
+    [SerializeField] private GameObject attackHitboxSingle;
+    [SerializeField] private GameObject attackHitboxMulti;
+
+    [Header("Habilidad 1: Aturdimiento")]
+    [SerializeField] public Image imageStun; // Imagen del botón de aturdimiento en el HUD
+    [SerializeField] public float stunRadius = 5f; // Radio de aturdimiento
+    [SerializeField] public float stunDuration = 2f; // Duración del aturdimiento
+    [SerializeField] public float stunCoolddown = 10f; // Tiempo de recarga del aturdimiento
+    [SerializeField] public bool canStun = true; // Indica si el jugador puede aturdir
+
+
+    [Header("Habilidad 2: Invencible")]
+    [SerializeField] public Image imageInvincible; // Imagen del botón de invencibilidad en el HUD
+    [SerializeField] public float invincibleDuration = 3f; // Duración de la invencibilidad
+    [SerializeField] public bool isInvincible = false; // Indica si el jugador es invencible
+    [SerializeField] public float invincibleCooldown = 25f; // Tiempo de recarga de la invencibilidad
+    [SerializeField] public bool canUseInvincible = true;
+    [SerializeField] public ParticleSystem invincibleEffect; // Efecto visual para la invencibilidad
+
+
+    [Header("Animaciones")]
+    [SerializeField] private Animator anima; // Referencia al componente Animator
+
+    private void Start()
+    {
+        imageStun.fillAmount = 0f; // Asegura que la imagen del botón de aturdimiento esté llena al inicio
+        imageInvincible.fillAmount = 0f; // Asegura que la imagen del botón de invencibilidad esté llena al inicio
+        invincibleEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting); // Asegura que el efecto de invencibilidad esté detenido al inicio
+        anima = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            Debug.Log("Ataque normal activado");
+            singleAttack();
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            Debug.Log("Ataque múltiple activado");
+            multipleAttack();
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            if (canStun)
+            {
+                Debug.Log("Aturdimiento activado");
+                areaStun();
+                canStun = false; // Desactiva el aturdimiento hasta que se recargue
+                StartCoroutine(StunCooldown());
+                StartCoroutine(StunCooldownUI());
+
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (canUseInvincible)
+            {
+                Debug.Log("Invencibilidad activada");
+                StartCoroutine(invencibleBuff());
+                StartCoroutine(invencibleCooldown());
+                StartCoroutine(InvencibleCooldownUI());
+            }
+
+        }
+    }
+
+
+    void singleAttack()
+    {
+        StartCoroutine(ActivateHitbox());
+    }
+
+    IEnumerator ActivateHitbox()
+    {
+        attackHitboxSingle.SetActive(true);
+        yield return new WaitForSeconds(0.2f); // tiempo del golpe
+        attackHitboxSingle.SetActive(false);
+    }
+
+
+    void multipleAttack()
+    {
+        StartCoroutine(ActivateHitboxMult());
+    }
+
+    IEnumerator ActivateHitboxMult()
+    {
+        attackHitboxMulti.SetActive(true);
+        yield return new WaitForSeconds(0.2f); // tiempo del golpe
+        attackHitboxMulti.SetActive(false);
+    }
+
+    void areaStun()
+    {
+        StartCoroutine(stunDebuff());
+    }
+
+    IEnumerator stunDebuff()
+    {
+        // Obtiene todos los colliders dentro del radio de aturdimiento
+        Collider[] hits = Physics.OverlapSphere(transform.position, stunRadius);
+            
+        foreach (Collider hit in hits)
+        {
+            if (hit.CompareTag("Enemy"))
+            {
+                Enemigo enemy = hit.GetComponent<Enemigo>(); // Obtiene el componente Enemy del enemigo
+                if (enemy != null)
+                {
+                    enemy.ApplyStun(stunDuration);
+                    Debug.Log("Enemigo aturdido: " + hit.name); // Imprime el nombre del enemigo aturdido en la consola
+                }   
+            }
+        }
+
+        yield return new WaitForSeconds(stunDuration); // Espera la duración del aturdimiento antes de permitir otro aturdimiento
+        //StartCoroutine(StunCooldown());
+    }
+
+    IEnumerator StunCooldown()
+    { 
+        Debug.Log("Cooldown de stun iniciado"); // Imprime un mensaje indicando que el cooldown ha comenzado
+        yield return new WaitForSeconds(stunCoolddown); // Espera el tiempo de recarga del aturdimiento
+        canStun = true; // Permite que el jugador pueda aturdir nuevamente
+        Debug.Log("Stun listo otra vez"); // Imprime un mensaje indicando que el aturdimiento está listo nuevamente
+    }
+
+    IEnumerator invencibleBuff()
+    {
+        isInvincible = true;
+        GetComponent<PlayerHealth>().isInvincible = true;
+        invincibleEffect.Play(); // empieza el efecto
+
+        yield return new WaitForSeconds(invincibleDuration);
+
+        isInvincible = false;
+        GetComponent<PlayerHealth>().isInvincible = false;
+        invincibleEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting); // para el efecto pero deja las partículas que ya están en el aire
+        Debug.Log("Invencibilidad terminada");
+    }
+
+
+    IEnumerator invencibleCooldown()
+    {
+        canUseInvincible = false;
+
+        Debug.Log("Cooldown de invencibilidad iniciado");
+        yield return new WaitForSeconds(invincibleCooldown);
+
+        canUseInvincible = true;
+        Debug.Log("Invencibilidad lista otra vez");
+    }
+
+
+    IEnumerator StunCooldownUI()
+    {
+        float tiempo = stunCoolddown;
+        imageStun.fillAmount = 1f;
+
+        while (tiempo > 0)
+        {
+            tiempo -= Time.deltaTime;
+            imageStun.fillAmount = tiempo / stunCoolddown;
+            yield return null;
+        }
+
+        imageStun.fillAmount = 0f;
+    }
+
+    IEnumerator InvencibleCooldownUI()
+    {
+        float tiempo = invincibleCooldown;
+        imageInvincible.fillAmount = 1f;
+        while (tiempo > 0)
+        {
+            tiempo -= Time.deltaTime;
+            imageInvincible.fillAmount = tiempo / invincibleCooldown;
+            yield return null;
+        }
+        imageInvincible.fillAmount = 0f;
+    }
+
+}
+
