@@ -16,6 +16,7 @@ public class NormalAttack : MonoBehaviour
     [SerializeField] public float stunDuration = 2f; // Duración del aturdimiento
     [SerializeField] public float stunCoolddown = 10f; // Tiempo de recarga del aturdimiento
     [SerializeField] public bool canStun = true; // Indica si el jugador puede aturdir
+    [SerializeField] public ParticleSystem stunEffect; // Efecto visual para el aturdimiento
 
 
     [Header("Habilidad 2: Invencible")]
@@ -35,21 +36,33 @@ public class NormalAttack : MonoBehaviour
         imageStun.fillAmount = 0f; // Asegura que la imagen del botón de aturdimiento esté llena al inicio
         imageInvincible.fillAmount = 0f; // Asegura que la imagen del botón de invencibilidad esté llena al inicio
         invincibleEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting); // Asegura que el efecto de invencibilidad esté detenido al inicio
+        stunEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting); // Asegura que el efecto de aturdimiento esté detenido al inicio
         anima = GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N))
+        // Cuando haces click izquierdo
+        //if (!GameState.inputEnabled)
+        //    return;
+        if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("Ataque normal activado");
+            // anima.SetTrigger("attack"); // Activa la animación de ataque
             singleAttack();
         }
-        if (Input.GetKeyDown(KeyCode.M))
+
+        if (Input.GetMouseButtonDown(1))
         {
-            Debug.Log("Ataque múltiple activado");
+            Debug.Log("Animación de ataque múltiple activada");
+            //anima.SetTrigger("attackMulti"); // Activa la animación de ataque múltiple
             multipleAttack();
         }
+        //if (Input.GetKeyDown(KeyCode.M))
+        //{
+        //    Debug.Log("Ataque múltiple activado");
+        //    multipleAttack();
+        //}
         if (Input.GetKeyDown(KeyCode.T))
         {
             if (canStun)
@@ -110,7 +123,7 @@ public class NormalAttack : MonoBehaviour
     {
         // Obtiene todos los colliders dentro del radio de aturdimiento
         Collider[] hits = Physics.OverlapSphere(transform.position, stunRadius);
-            
+        stunEffect.Play(); // Empieza el efecto de aturdimiento
         foreach (Collider hit in hits)
         {
             if (hit.CompareTag("Enemy"))
@@ -125,6 +138,7 @@ public class NormalAttack : MonoBehaviour
         }
 
         yield return new WaitForSeconds(stunDuration); // Espera la duración del aturdimiento antes de permitir otro aturdimiento
+        stunEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting); // Detiene el efecto de aturdimiento pero deja las partículas que ya están en el aire
         //StartCoroutine(StunCooldown());
     }
 

@@ -2,7 +2,7 @@
 - Project name: JuegoFari
 - Unity version: Unity 6000.3.3f1
 - Active game object:
-  - Name: PauseManager
-  - Tag: Untagged
-  - Layer: UI
+  - Name: Player
+  - Tag: Player
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
