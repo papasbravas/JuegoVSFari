@@ -27,17 +27,21 @@ public class NormalAttack : MonoBehaviour
     [SerializeField] public bool canUseInvincible = true;
     [SerializeField] public ParticleSystem invincibleEffect; // Efecto visual para la invencibilidad
 
+    [Header("Habilidad 3: Defensa")]
+    [SerializeField] public float defenseBuffDuration = 5f; // Duración del buff de defensa
+    [SerializeField] public float defenseBuffAmount = 0.5f; // Cantidad de reducción de daño (ejemplo: 0.5 para reducir el daño a la mitad)
+    [SerializeField] public bool canUseDefenseBuff = true; // Indica si el jugador puede usar el buff de defensa
+    [SerializeField] public float defenseBuffCooldown = 15f; // Tiempo de recarga del buff de defensa
+    [SerializeField] public Image imageDefenseBuff; // Imagen del botón de buff de defensa en el HUD
+    [SerializeField] public ParticleSystem defenseBuffEffect; // Efecto visual para el buff de defensa
 
-    [Header("Animaciones")]
-    [SerializeField] private Animator anima; // Referencia al componente Animator
-
+    
     private void Start()
     {
         imageStun.fillAmount = 0f; // Asegura que la imagen del botón de aturdimiento esté llena al inicio
         imageInvincible.fillAmount = 0f; // Asegura que la imagen del botón de invencibilidad esté llena al inicio
         invincibleEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting); // Asegura que el efecto de invencibilidad esté detenido al inicio
         stunEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting); // Asegura que el efecto de aturdimiento esté detenido al inicio
-        anima = GetComponent<Animator>();
     }
 
     void Update()
@@ -58,12 +62,8 @@ public class NormalAttack : MonoBehaviour
             //anima.SetTrigger("attackMulti"); // Activa la animación de ataque múltiple
             multipleAttack();
         }
-        //if (Input.GetKeyDown(KeyCode.M))
-        //{
-        //    Debug.Log("Ataque múltiple activado");
-        //    multipleAttack();
-        //}
-        if (Input.GetKeyDown(KeyCode.T))
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (canStun)
             {
@@ -75,7 +75,8 @@ public class NormalAttack : MonoBehaviour
 
             }
         }
-        if (Input.GetKeyDown(KeyCode.I))
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             if (canUseInvincible)
             {
@@ -84,10 +85,40 @@ public class NormalAttack : MonoBehaviour
                 StartCoroutine(invencibleCooldown());
                 StartCoroutine(InvencibleCooldownUI());
             }
+        }
 
+        // Si pulsa la tecla con el numero 3, activa el buff de defensa
+        if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (canUseDefenseBuff)
+            {
+                Debug.Log("Buff de defensa activado");
+                StartCoroutine(ActivateDefenseBuff());
+                StartCoroutine(DefenseBuffCooldown());
+                //StartCoroutine(DefenseBuffCooldownUI());
+            }
         }
     }
 
+    IEnumerator ActivateDefenseBuff()
+    {
+        yield return new WaitForSeconds(defenseBuffDuration);
+    }
+
+    IEnumerator DefenseBuffDuration()
+    {
+        // Debe de reducir a la mitad todo el daño recibido por el jugador durante la duración del buff de defensa
+        yield return null;
+    }
+
+    IEnumerator DefenseBuffCooldown()
+    {
+        canUseDefenseBuff = false;
+        Debug.Log("Cooldown de buff de defensa iniciado");
+        yield return new WaitForSeconds(defenseBuffCooldown);
+        canUseDefenseBuff = true;
+        Debug.Log("Buff de defensa listo otra vez");
+    }
 
     void singleAttack()
     {
@@ -203,6 +234,19 @@ public class NormalAttack : MonoBehaviour
             yield return null;
         }
         imageInvincible.fillAmount = 0f;
+    }
+
+    IEnumerator DefenseCooldownUI()
+    {
+        float tiempo = defenseBuffCooldown;
+        imageDefenseBuff.fillAmount = 1f;
+        while (tiempo > 0)
+        {
+            tiempo -= Time.deltaTime;
+            imageDefenseBuff.fillAmount = tiempo / defenseBuffCooldown;
+            yield return null;
+        }
+        imageDefenseBuff.fillAmount = 0f;
     }
 
 }
