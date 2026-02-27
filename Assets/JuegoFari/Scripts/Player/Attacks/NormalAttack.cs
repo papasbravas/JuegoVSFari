@@ -95,21 +95,33 @@ public class NormalAttack : MonoBehaviour
                 Debug.Log("Buff de defensa activado");
                 StartCoroutine(ActivateDefenseBuff());
                 StartCoroutine(DefenseBuffCooldown());
-                //StartCoroutine(DefenseBuffCooldownUI());
+                StartCoroutine(DefenseBuffCooldownUI());
             }
         }
     }
 
     IEnumerator ActivateDefenseBuff()
     {
+        canUseDefenseBuff = false;
+
+        PlayerHealth playerHealth = GetComponent<PlayerHealth>();
+        playerHealth.hasDefenseBuff = true;
+
+        if (defenseBuffEffect != null)
+            defenseBuffEffect.Play();
+
+        Debug.Log("Buff de defensa ACTIVADO");
+
         yield return new WaitForSeconds(defenseBuffDuration);
+
+        playerHealth.hasDefenseBuff = false;
+
+        if (defenseBuffEffect != null)
+            defenseBuffEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+
+        Debug.Log("Buff de defensa TERMINADO");
     }
 
-    IEnumerator DefenseBuffDuration()
-    {
-        // Debe de reducir a la mitad todo el daño recibido por el jugador durante la duración del buff de defensa
-        yield return null;
-    }
 
     IEnumerator DefenseBuffCooldown()
     {
@@ -236,7 +248,7 @@ public class NormalAttack : MonoBehaviour
         imageInvincible.fillAmount = 0f;
     }
 
-    IEnumerator DefenseCooldownUI()
+    IEnumerator DefenseBuffCooldownUI()
     {
         float tiempo = defenseBuffCooldown;
         imageDefenseBuff.fillAmount = 1f;

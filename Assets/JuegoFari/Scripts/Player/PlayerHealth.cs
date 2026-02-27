@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -6,7 +7,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float maxHealth = 100f; // Salud máxima del jugador
     private float currentHealth; // Salud actual del jugador
     public bool isInvincible = false; // Indica si el jugador es invencible 
-
+    public bool hasDefenseBuff = false;
+    [SerializeField] private float defenseMultiplier = 0.5f; // 50% de daño reducido cuando el buff de defensa está activo
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -21,18 +23,26 @@ public class PlayerHealth : MonoBehaviour
         if (isInvincible)
         {
             Debug.Log("Jugador es invencible y no recibe daño.");
-            return; // No aplicar daño si el jugador es invencible
+            return;
         }
 
-        currentHealth -= damage; // Restar el daño a la salud actual
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // Asegurarse de que la salud no sea menor que 0 ni mayor que la máxima
+        float finalDamage = damage;
 
-        Debug.Log("Jugador ha recibido daño: " + damage + ". Salud actual: " + currentHealth);
-        HUDHealth.Instance.UpdateHealthBar(currentHealth, maxHealth); // Actualiza la barra de salud en el HUD
-
-        if(currentHealth <= 0)
+        if (hasDefenseBuff)
         {
-            // Llamar al metodo de morir o mandar a menu de inicio
+            finalDamage *= defenseMultiplier;
+            Debug.Log("Buff defensivo activo. Daño reducido a: " + finalDamage);
+        }
+
+        currentHealth -= finalDamage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        Debug.Log("Jugador ha recibido daño: " + finalDamage + ". Salud actual: " + currentHealth);
+        HUDHealth.Instance.UpdateHealthBar(currentHealth, maxHealth);
+
+        if (currentHealth <= 0)
+        {
+            SceneManager.LoadScene("MenuInicio");
         }
     }
 }

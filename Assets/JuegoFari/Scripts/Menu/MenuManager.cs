@@ -88,7 +88,7 @@ public class MenuManager : MonoBehaviour
             musicaFondo.Stop(); // Detener la musica de fondo
         }
 
-        SceneManager.LoadScene("Nivel1"); // Cargar la escena del nivel
+        SceneManager.LoadScene("Introducción"); // Cargar la escena del nivel
     }
 
 
@@ -99,7 +99,7 @@ public class MenuManager : MonoBehaviour
 
     public void Cargar()
     {
-        SceneManager.LoadScene("Nivel1"); // Cargar la escena del juego
+        SceneManager.LoadScene("Introducción"); // Cargar la escena del juego
         Time.timeScale = 1f;
     }
 
