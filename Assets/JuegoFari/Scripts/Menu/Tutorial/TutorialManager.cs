@@ -42,14 +42,14 @@ public class TutorialManager : MonoBehaviour
                 break;
             case 3:
                 // Aturdimiento
-                if(Input.GetKeyDown(KeyCode.T))
+                if(Input.GetKeyDown(KeyCode.Alpha1))
                 {
                     SiguientePaso();
                 }
                 break;
             case 4:
                 // Invencibilidad
-                if(Input.GetKeyDown(KeyCode.I))
+                if(Input.GetKeyDown(KeyCode.Alpha2))
                 {
                     Fin();
                 }
@@ -71,10 +71,10 @@ public class TutorialManager : MonoBehaviour
                 textoTuto.text = "Presiona el botón derecho del ratón para un ataque en área.";
                 break;
             case 3:
-                textoTuto.text = "Presiona T para aturdir a los enemigos cercanos.";
+                textoTuto.text = "Presiona el 1 para aturdir a los enemigos cercanos.";
                 break;
             case 4:
-                textoTuto.text ="Presiona I para volverte invencible durante un tiempo.";
+                textoTuto.text ="Presiona el 2 para volverte invencible durante un tiempo.";
                 break;
         }
     }
