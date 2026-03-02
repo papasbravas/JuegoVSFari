@@ -12,7 +12,9 @@ public class MusicaManager : MonoBehaviour
 
     [Header("Fades")]
     [SerializeField] private float fadeDuration = 2f; // Duración del fade in/out
+
     private Coroutine fadeActual; // Referencia al fade actual para evitar solapamientos
+    private AudioSource fuenteActual; // Referencia a la fuente de audio actualmente en reproducción
 
     private void Awake()
     {
@@ -21,37 +23,77 @@ public class MusicaManager : MonoBehaviour
 
     private void Start()
     {
-        musicaAmbiental.Play(); // Iniciar la musica de ambiente al inicio
-        musicaJefe.Stop(); // Asegurarse de que la musica de jefe esté detenida al inicio
+        // Estado inicial
+        musicaAmbiental.volume = 1f;
+        musicaJefe.volume = 0f;
+        musicaMenu.volume = 0f;
+
+        if (!musicaAmbiental.isPlaying) musicaAmbiental.Play();
+        musicaJefe.Stop();
+        musicaMenu.Stop();
+
+        fuenteActual = musicaAmbiental;
     }
 
-    public void CambiarAMusicaJefe()
-    {
-        // Al entrar en la zona con el tag designado, cambiar a la música de cada jefe correspondiente con un fade suave
-    }
+    public void CambiarAMusicaJefe() => CambiarMusica(musicaJefe);
+    public void VolverAMusicaAmbiental() => CambiarMusica(musicaAmbiental);
+    public void CambiarAMusicaMenu() => CambiarMusica(musicaMenu);
 
-    public void OnCanvasGroupChanged()
+    private void CambiarMusica(AudioSource nueva)
     {
-        // Al salir de la zona del tag designado, volver a la música ambiental con un fade suave
-    }
+        if (nueva == null) return;
 
-    public void IniciarFace()
-    {
-        // Método para iniciar el fade in de la música ambiental al inicio del juego o al volver al menú
+        // Si ya está sonando esa, no hagas nada
+        if (fuenteActual == nueva) return;
+
+        // Si no había actual, simplemente arranca la nueva
+        if (fuenteActual == null)
+        {
+            nueva.volume = 1f;
+            if (!nueva.isPlaying) nueva.Play();
+            fuenteActual = nueva;
+            return;
+        }
+
+        // Evitar solapamientos de fades
+        if (fadeActual != null) StopCoroutine(fadeActual);
+
+        // Preparar la nueva
+        nueva.volume = 0f;
+        if (!nueva.isPlaying) nueva.Play();
+
+        fadeActual = StartCoroutine(FadeCoroutine(fuenteActual, nueva));
+        fuenteActual = nueva;
     }
 
     private IEnumerator FadeCoroutine(AudioSource from, AudioSource to)
     {
         float time = 0f;
+
+        float fromStart = from != null ? from.volume : 0f;
+        float toStart = to != null ? to.volume : 0f;
+
         while (time < fadeDuration)
         {
-            from.volume = Mathf.Lerp(1f, 0f, time / fadeDuration); // Fade out de la música actual
-            to.volume = Mathf.Lerp(0f, 1f, time / fadeDuration); // Fade in de la nueva música
             time += Time.deltaTime;
+            float t = Mathf.Clamp01(time / fadeDuration);
+
+            if (from != null) from.volume = Mathf.Lerp(fromStart, 0f, t);
+            if (to != null) to.volume = Mathf.Lerp(toStart, 1f, t);
+
             yield return null;
         }
-        from.Stop(); // Detener la música anterior al finalizar el fade out
-        to.volume = 1f; // Asegurar que la nueva música esté al volumen máximo al finalizar el fade in
+
+        if (from != null)
+        {
+            from.volume = 0f;
+            from.Stop();
+        }
+
+        if (to != null)
+            to.volume = 1f;
+
+        fadeActual = null;
     }
 
 }

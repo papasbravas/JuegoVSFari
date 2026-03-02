@@ -10,6 +10,18 @@ public class NormalAttack : MonoBehaviour
     [SerializeField] private GameObject attackHitboxSingle;
     [SerializeField] private GameObject attackHitboxMulti;
 
+    [Header("SFX (Sonidos)")]
+    [SerializeField] private AudioSource sfxSource;   // AudioSource SOLO para efectos
+    [SerializeField] private float sfxVolume = 1f;
+
+    [SerializeField] private AudioClip sfxSingleAttack;
+    [SerializeField] private AudioClip sfxMultiAttack;
+    [SerializeField] private AudioClip sfxStun;
+    [SerializeField] private AudioClip sfxInvincibleOn;
+    [SerializeField] private AudioClip sfxInvincibleOff;
+    [SerializeField] private AudioClip sfxDefenseOn;
+    [SerializeField] private AudioClip sfxDefenseOff;
+
     [Header("Habilidad 1: Aturdimiento")]
     [SerializeField] public Image imageStun; // Imagen del botón de aturdimiento en el HUD
     [SerializeField] public float stunRadius = 5f; // Radio de aturdimiento
@@ -52,6 +64,7 @@ public class NormalAttack : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("Ataque normal activado");
+            PlaySFX(sfxSingleAttack);
             // anima.SetTrigger("attack"); // Activa la animación de ataque
             singleAttack();
         }
@@ -59,6 +72,7 @@ public class NormalAttack : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             Debug.Log("Animación de ataque múltiple activada");
+            PlaySFX(sfxMultiAttack);
             //anima.SetTrigger("attackMulti"); // Activa la animación de ataque múltiple
             multipleAttack();
         }
@@ -68,6 +82,7 @@ public class NormalAttack : MonoBehaviour
             if (canStun)
             {
                 Debug.Log("Aturdimiento activado");
+                PlaySFX(sfxStun);
                 areaStun();
                 canStun = false; // Desactiva el aturdimiento hasta que se recargue
                 StartCoroutine(StunCooldown());
@@ -81,6 +96,7 @@ public class NormalAttack : MonoBehaviour
             if (canUseInvincible)
             {
                 Debug.Log("Invencibilidad activada");
+                PlaySFX(sfxInvincibleOn);
                 StartCoroutine(invencibleBuff());
                 StartCoroutine(invencibleCooldown());
                 StartCoroutine(InvencibleCooldownUI());
@@ -93,11 +109,23 @@ public class NormalAttack : MonoBehaviour
             if (canUseDefenseBuff)
             {
                 Debug.Log("Buff de defensa activado");
+                PlaySFX(sfxDefenseOn);
                 StartCoroutine(ActivateDefenseBuff());
                 StartCoroutine(DefenseBuffCooldown());
                 StartCoroutine(DefenseBuffCooldownUI());
             }
         }
+    }
+
+    private void PlaySFX(AudioClip clip)
+    {
+        if (clip == null || sfxSource == null) return;
+
+        float originalPitch = sfxSource.pitch;
+
+        sfxSource.PlayOneShot(clip, sfxVolume);
+
+        sfxSource.pitch = originalPitch;
     }
 
     IEnumerator ActivateDefenseBuff()
