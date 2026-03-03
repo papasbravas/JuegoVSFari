@@ -35,6 +35,7 @@ public class MusicaManager : MonoBehaviour
         fuenteActual = musicaAmbiental;
     }
 
+    // Métodos públicos para cambiar la música según el estado del juego
     public void CambiarAMusicaJefe() => CambiarMusica(musicaJefe);
     public void VolverAMusicaAmbiental() => CambiarMusica(musicaAmbiental);
     public void CambiarAMusicaMenu() => CambiarMusica(musicaMenu);
@@ -70,16 +71,16 @@ public class MusicaManager : MonoBehaviour
     {
         float time = 0f;
 
-        float fromStart = from != null ? from.volume : 0f;
-        float toStart = to != null ? to.volume : 0f;
+        float fromStart = from != null ? from.volume : 0f; // Guardar el volumen inicial de la fuente que se va a apagar
+        float toStart = to != null ? to.volume : 0f; // Guardar el volumen inicial de la fuente que se va a encender
 
         while (time < fadeDuration)
         {
             time += Time.deltaTime;
-            float t = Mathf.Clamp01(time / fadeDuration);
+            float t = Mathf.Clamp01(time / fadeDuration); // Normalizar el tiempo para que vaya de 0 a 1
 
-            if (from != null) from.volume = Mathf.Lerp(fromStart, 0f, t);
-            if (to != null) to.volume = Mathf.Lerp(toStart, 1f, t);
+            if (from != null) from.volume = Mathf.Lerp(fromStart, 0f, t); // Interpolar el volumen de la fuente que se va a apagar
+            if (to != null) to.volume = Mathf.Lerp(toStart, 1f, t); // Interpolar el volumen de la fuente que se va a encender
 
             yield return null;
         }

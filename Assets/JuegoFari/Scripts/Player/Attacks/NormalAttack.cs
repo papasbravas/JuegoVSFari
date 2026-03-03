@@ -41,13 +41,29 @@ public class NormalAttack : MonoBehaviour
 
     [Header("Habilidad 3: Defensa")]
     [SerializeField] public float defenseBuffDuration = 5f; // Duración del buff de defensa
-    [SerializeField] public float defenseBuffAmount = 0.5f; // Cantidad de reducción de daño (ejemplo: 0.5 para reducir el daño a la mitad)
+    [SerializeField] public float defenseBuffAmount = 0.5f; // Cantidad de reducción de daño
     [SerializeField] public bool canUseDefenseBuff = true; // Indica si el jugador puede usar el buff de defensa
     [SerializeField] public float defenseBuffCooldown = 15f; // Tiempo de recarga del buff de defensa
     [SerializeField] public Image imageDefenseBuff; // Imagen del botón de buff de defensa en el HUD
     [SerializeField] public ParticleSystem defenseBuffEffect; // Efecto visual para el buff de defensa
 
-    
+    [Header("Habilidad 4: Ralentizar jefe")]
+    [SerializeField] public float slowBossDuration = 5f; // Duración del efecto de ralentización en el jefe
+    [SerializeField] public float slowBossAmount = 0.5f; // Cantidad de ralentización
+    [SerializeField] public bool canUseSlowBoss = true; // Indica si el jugador puede usar la habilidad de ralentizar al jefe
+    [SerializeField] public float slowBossCooldown = 20f; // Tiempo de recarga de la habilidad de ralentizar al jefe
+    [SerializeField] public Image imageSlowBoss; // Imagen del botón de ralentizar al jefe en el HUD
+    [SerializeField] public ParticleSystem slowBossEffect; // Efecto visual para la habilidad de ralentizar al jefe
+
+    [Header("Habilidad 5: Daño progresivo")]
+    [SerializeField] public float damageOverTimeDuration = 5f; // Duración del efecto de daño progresivo
+    [SerializeField] public float damageOverTimeAmount = 2f; // Cantidad de daño por segundo del efecto de daño progresivo
+    [SerializeField] public bool canUseDamageOverTime = true; // Indica si el jugador puede usar la habilidad de daño progresivo
+    [SerializeField] public float damageOverTimeCooldown = 12f; // Tiempo de recarga de la habilidad de daño progresivo
+    [SerializeField] public Image imageDamageOverTime; // Imagen del botón de daño progresivo en el HUD
+    [SerializeField] private float damageOverTimeRadius = 5f;
+
+
     private void Start()
     {
         imageStun.fillAmount = 0f; // Asegura que la imagen del botón de aturdimiento esté llena al inicio
@@ -115,6 +131,125 @@ public class NormalAttack : MonoBehaviour
                 StartCoroutine(DefenseBuffCooldownUI());
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            if (canUseSlowBoss)
+            {
+                Debug.Log("Ralentizar jefe activado");
+                //PlaySFX(sfxSlowBoss);
+                StartCoroutine(SlowBossEffect());
+                StartCoroutine(SlowBossCooldown());
+                StartCoroutine(SlowBossCooldownUI());
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            if (canUseDamageOverTime)
+            {
+                Debug.Log("Daño progresivo activado");
+
+                StartCoroutine(ActivateDamageOverTime());
+                StartCoroutine(DamageOverTimeCooldown());
+                StartCoroutine(DamageOverTimeCooldownUI());
+            }
+        }
+    }
+
+    IEnumerator ActivateDamageOverTime()
+    {
+        canUseDamageOverTime = false;
+
+        // Detecta enemigos en área
+        Collider[] hits = Physics.OverlapSphere(transform.position, damageOverTimeRadius);
+
+        foreach (Collider hit in hits)
+        {
+            if (hit.CompareTag("Enemy"))
+            {
+                Enemigo enemy = hit.GetComponent<Enemigo>();
+                if (enemy != null)
+                {
+                    enemy.ApplyDamageOverTime(damageOverTimeAmount, damageOverTimeDuration);
+                    Debug.Log("Aplicando daño progresivo a: " + hit.name);
+                }
+            }
+        }
+
+        yield return new WaitForSeconds(damageOverTimeDuration);
+
+    }
+
+    IEnumerator DamageOverTimeCooldown()
+    {
+        Debug.Log("Cooldown daño progresivo iniciado");
+        yield return new WaitForSeconds(damageOverTimeCooldown);
+        canUseDamageOverTime = true;
+        Debug.Log("Daño progresivo listo otra vez");
+    }
+
+    IEnumerator DamageOverTimeCooldownUI()
+    {
+        float tiempo = damageOverTimeCooldown;
+        imageDamageOverTime.fillAmount = 1f;
+
+        while (tiempo > 0)
+        {
+            tiempo -= Time.deltaTime;
+            imageDamageOverTime.fillAmount = tiempo / damageOverTimeCooldown;
+            yield return null;
+        }
+
+        imageDamageOverTime.fillAmount = 0f;
+    }
+
+    IEnumerator SlowBossEffect()
+    {
+        // Aqui hay que poner el codigo para ralentizar exclusivamente al jefe (por el tag supongo)
+        canUseSlowBoss = false; // Desactiva la habilidad de ralentizar al jefe hasta que se recargue
+
+        GameObject boss = GameObject.FindGameObjectWithTag("Boss"); // Encuentra el objeto con el tag "Boss"
+
+        // Debe de ralentizar al jefe independientemente de la distancia al mismo
+        if (boss != null)
+        {
+            // Enemigo bossScript = boss.GetComponent<Enemigo>(); // Obtiene el script del enemigo del jefe
+            // if(bossScript != null){
+            //     bossScript.ApplySlow(slowBossAmount, slowBossDuration); // Aplica el efecto de ralentización al jefe
+            //  
+            // if(slowBossEffect != null){
+            //     slowBossEffect.Play(); // Empieza el efecto visual de ralentización
+            //  Debug.Log("Jefe ralentizado por " + slowBossDuration + " segundos"); // Imprime un mensaje en la consola indicando que el jefe ha sido ralentizado
+            // }
+        }
+        else
+        {
+            Debug.Log("No se encontró el jefe para ralentizar"); // Imprime un mensaje en la consola indicando que no se encontró el jefe
+        }
+
+        yield return new WaitForSeconds(slowBossDuration);
+        canUseSlowBoss = true; // Permite que el jugador pueda usar la habilidad de ralentizar al jefe nuevamente
+    }
+
+    IEnumerator SlowBossCooldown()
+    {
+        Debug.Log("Cooldown de ralentizar jefe iniciado"); // Imprime un mensaje indicando que el cooldown ha comenzado
+        yield return new WaitForSeconds(slowBossCooldown); // Espera el tiempo de recarga de la habilidad de ralentizar al jefe
+        canUseSlowBoss = true; // Permite que el jugador pueda usar la habilidad de ralentizar al jefe nuevamente
+        Debug.Log("Ralentizar jefe listo otra vez"); // Imprime un mensaje indicando que la habilidad de ralentizar al jefe está lista nuevamente
+    }
+
+    IEnumerator SlowBossCooldownUI()
+    {
+        float tiempo = slowBossCooldown;
+        imageSlowBoss.fillAmount = 1f;
+        while (tiempo > 0)
+        {
+            tiempo -= Time.deltaTime;
+            imageSlowBoss.fillAmount = tiempo / slowBossCooldown;
+            yield return null;
+        }
+        imageSlowBoss.fillAmount = 0f;
     }
 
     private void PlaySFX(AudioClip clip)
@@ -160,6 +295,19 @@ public class NormalAttack : MonoBehaviour
         Debug.Log("Buff de defensa listo otra vez");
     }
 
+    IEnumerator DefenseBuffCooldownUI()
+    {
+        float tiempo = defenseBuffCooldown;
+        imageDefenseBuff.fillAmount = 1f;
+        while (tiempo > 0)
+        {
+            tiempo -= Time.deltaTime;
+            imageDefenseBuff.fillAmount = tiempo / defenseBuffCooldown;
+            yield return null;
+        }
+        imageDefenseBuff.fillAmount = 0f;
+    }
+
     void singleAttack()
     {
         StartCoroutine(ActivateHitbox());
@@ -171,7 +319,6 @@ public class NormalAttack : MonoBehaviour
         yield return new WaitForSeconds(0.2f); // tiempo del golpe
         attackHitboxSingle.SetActive(false);
     }
-
 
     void multipleAttack()
     {
@@ -221,6 +368,21 @@ public class NormalAttack : MonoBehaviour
         Debug.Log("Stun listo otra vez"); // Imprime un mensaje indicando que el aturdimiento está listo nuevamente
     }
 
+    IEnumerator StunCooldownUI()
+    {
+        float tiempo = stunCoolddown;
+        imageStun.fillAmount = 1f;
+
+        while (tiempo > 0)
+        {
+            tiempo -= Time.deltaTime;
+            imageStun.fillAmount = tiempo / stunCoolddown;
+            yield return null;
+        }
+
+        imageStun.fillAmount = 0f;
+    }
+
     IEnumerator invencibleBuff()
     {
         isInvincible = true;
@@ -247,22 +409,6 @@ public class NormalAttack : MonoBehaviour
         Debug.Log("Invencibilidad lista otra vez");
     }
 
-
-    IEnumerator StunCooldownUI()
-    {
-        float tiempo = stunCoolddown;
-        imageStun.fillAmount = 1f;
-
-        while (tiempo > 0)
-        {
-            tiempo -= Time.deltaTime;
-            imageStun.fillAmount = tiempo / stunCoolddown;
-            yield return null;
-        }
-
-        imageStun.fillAmount = 0f;
-    }
-
     IEnumerator InvencibleCooldownUI()
     {
         float tiempo = invincibleCooldown;
@@ -274,19 +420,6 @@ public class NormalAttack : MonoBehaviour
             yield return null;
         }
         imageInvincible.fillAmount = 0f;
-    }
-
-    IEnumerator DefenseBuffCooldownUI()
-    {
-        float tiempo = defenseBuffCooldown;
-        imageDefenseBuff.fillAmount = 1f;
-        while (tiempo > 0)
-        {
-            tiempo -= Time.deltaTime;
-            imageDefenseBuff.fillAmount = tiempo / defenseBuffCooldown;
-            yield return null;
-        }
-        imageDefenseBuff.fillAmount = 0f;
     }
 
 }

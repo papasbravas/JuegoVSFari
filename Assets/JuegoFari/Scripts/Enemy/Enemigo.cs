@@ -17,6 +17,8 @@ public class Enemigo : MonoBehaviour
 
     public GameObject target;
     public bool isStunned = false;
+    [SerializeField] private float health; // Salud del enemigo
+    [SerializeField] private GameObject dotEffect; // Prefab del efecto de daño por segundo (DOT) para mostrar visualmente el daño continuo
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,6 +26,7 @@ public class Enemigo : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         target = GameObject.Find("Player");
+        
     }
 
     // Update is called once per frame
@@ -118,6 +121,41 @@ public class Enemigo : MonoBehaviour
         Debug.Log("Enemigo recuperado del aturdimiento"); // Imprime un mensaje en la consola indicando que el enemigo se ha recuperado del aturdimiento
     }
 
+    public void TakeDamage(float damage)
+    {
+        health -= damage; // Resta el daño a la salud del enemigo
+        Debug.Log(health); // Imprime la salud actual del enemigo en la consola
+    }
+
+    public void ApplyDamageOverTime(float damagePerSecond, float duration)
+    {
+        StartCoroutine(DamageOverTime(damagePerSecond, duration));
+    }
+
+    private IEnumerator DamageOverTime(float damagePerSecond, float duration)
+    {
+        float elapsed = 0f;
+        GameObject e = null;
+        if (dotEffect != null)
+        {
+            //dotEffect.SetActive(true);
+            Debug.Log("Hola efecto");
+             e = Instantiate(dotEffect, transform.position, Quaternion.identity); // Instancia el efecto de daño por segundo en la posición del enemigo y lo hace hijo del enemigo para que siga su movimiento
+        }
+        while (elapsed < duration)
+        {
+            TakeDamage(damagePerSecond);
+            yield return new WaitForSeconds(1f);
+            elapsed += 1f;
+        }
+
+        if (dotEffect != null)
+        {
+            Debug.Log("Adios efecto");
+            Destroy(e);
+        }
+            
+    }
     //private void OnTriggerEnter(Collider other)
     //{
     //    if(other.CompareTag("Player"))

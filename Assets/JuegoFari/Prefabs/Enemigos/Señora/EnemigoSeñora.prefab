@@ -2268,6 +2268,9 @@ MonoBehaviour:
   atacando: 0
   colliderAtaque: {fileID: 8449704639636884296}
   target: {fileID: 0}
+  isStunned: 0
+  health: 100
+  dotEffect: {fileID: 7853587546628051803, guid: a1cd03e99a4cd0241ada118bbcc84ad5, type: 3}
 --- !u!114 &4289726268329914270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2280,4 +2283,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b2171b65bb86148a118ca6eacedf62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  health: 100
