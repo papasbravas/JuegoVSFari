@@ -5,7 +5,7 @@ public class HUDHealth : MonoBehaviour
 {
     public static HUDHealth Instance;
 
-    [SerializeField] private TextMeshProUGUI healthText;
+    //[SerializeField] private TextMeshProUGUI healthText;
 
     private void Awake()
     {
@@ -14,6 +14,6 @@ public class HUDHealth : MonoBehaviour
 
     public void UpdateHealthBar(float current, float max)
     {
-        healthText.text = current + " / " + max;
+        //healthText.text = current + " / " + max;
     }
 }

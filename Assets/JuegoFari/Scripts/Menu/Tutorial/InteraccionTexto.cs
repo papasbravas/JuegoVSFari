@@ -18,10 +18,14 @@ public class InteraccionTexto : MonoBehaviour
         {
             texto.SetActive(true); // Muestra el texto al interactuar con el trigger
 
-            if(Input.GetKeyDown(KeyCode.E)) // Verifica si se presiona la tecla "E" para cargar el nivel
-            {
-                SceneManager.LoadScene(nameLevel); // Carga el nivel especificado en nameLevel
-            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (Input.GetKeyDown(KeyCode.E)) // Verifica si se presiona la tecla "E" para cargar el nivel
+        {
+            SceneManager.LoadScene(nameLevel); // Carga el nivel especificado en nameLevel
         }
     }
 
