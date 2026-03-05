@@ -21,6 +21,8 @@ public class BossFary : Boss
     //ataque magico
     public GameObject rayosPrefab;
 
+    private bool apareciendo = true;
+
 
 
     //Comportamiento del boss
@@ -135,7 +137,9 @@ public class BossFary : Boss
 
 
     //comportamiento mientras esté vivo
-    public void Vivo() { 
+    public void Vivo() {
+        if (apareciendo)
+            return;
         ComportamientoBoss();
     }
 
@@ -153,6 +157,12 @@ public class BossFary : Boss
                 muerto = true;
             }
         }
+    }
+
+
+    public void TerminaAparecer()
+    {
+        apareciendo = false;
     }
 }
 

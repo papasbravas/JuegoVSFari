@@ -17,6 +17,7 @@ public class Boss : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         target = GameObject.Find("Player");
+        //barra = GameObject.Find("BorderMask").GetComponent<Image>();
     }
 
 

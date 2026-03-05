@@ -15,6 +15,8 @@ public class BossCigala : Boss
     public RangoBoss rango;
     public GameObject[] hit;
 
+    private bool apareciendo = true;
+
 
     public int hit_select;
 
@@ -159,15 +161,23 @@ public class BossCigala : Boss
         lanzallamas = false;
     }
 
+    public void TerminaAparecer()
+    {
+        apareciendo = false;
+    }
+
     //qué hace si está vivo
     public void Vivo()
     {
+        if (apareciendo)
+            return;
         ComportamientoBoss();
 
     }
 
     private void Update()
     {
+        Debug.Log(apareciendo);
         barra.fillAmount = HP_Min / HP_Max;
         if (HP_Min > 0)
         {
