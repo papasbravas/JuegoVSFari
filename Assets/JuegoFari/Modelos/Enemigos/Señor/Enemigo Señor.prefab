@@ -1155,7 +1155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d631608c11ee09341a0d937fd810e1a4, type: 3}
       propertyPath: m_Name
-      value: The Boss
+      value: "Enemigo Se\xF1or"
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d631608c11ee09341a0d937fd810e1a4, type: 3}
       propertyPath: m_IsActive
@@ -2254,18 +2254,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 7221541259182768635}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66b52f4795abc8c499d18f8b8cf3223f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b5ec10aadba17a419a436860bbd8575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidad: 2
+  velocidad: 1
   velocidadPersecucion: 3
   rutina: 0
   cronometro: 0
   animator: {fileID: 0}
   angulo: {x: 0, y: 0, z: 0, w: 0}
   grado: 0
-  colliderAtaque: {fileID: 7714465832005693001}
+  atacando: 0
+  colliderAtaque: {fileID: 0}
   target: {fileID: 0}
+  isStunned: 0
+  health: 0
+  dotEffect: {fileID: 0}
 --- !u!136 &1303230827032582824
 CapsuleCollider:
   m_ObjectHideFlags: 0
