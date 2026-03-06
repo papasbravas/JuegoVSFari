@@ -6948,7 +6948,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b2171b65bb86148a118ca6eacedf62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  health: 0
 --- !u!1001 &292285404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13770,6 +13769,18 @@ MonoBehaviour:
   defenseBuffCooldown: 15
   imageDefenseBuff: {fileID: 0}
   defenseBuffEffect: {fileID: 0}
+  slowBossDuration: 5
+  slowBossAmount: 0.5
+  canUseSlowBoss: 1
+  slowBossCooldown: 20
+  imageSlowBoss: {fileID: 0}
+  slowBossEffect: {fileID: 0}
+  damageOverTimeDuration: 5
+  damageOverTimeAmount: 2
+  canUseDamageOverTime: 1
+  damageOverTimeCooldown: 12
+  imageDamageOverTime: {fileID: 0}
+  damageOverTimeRadius: 5
 --- !u!114 &575742239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31999,6 +32010,10 @@ PrefabInstance:
     - target: {fileID: 1814448471646551699, guid: 6b9e29afc414a6544bbef0c03f2b6353, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1814448471646551699, guid: 6b9e29afc414a6544bbef0c03f2b6353, type: 3}
+      propertyPath: m_TagString
+      value: Boss
       objectReference: {fileID: 0}
     - target: {fileID: 2007424047539992532, guid: 6b9e29afc414a6544bbef0c03f2b6353, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

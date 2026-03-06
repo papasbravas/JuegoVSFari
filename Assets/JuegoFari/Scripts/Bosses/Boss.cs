@@ -1,3 +1,4 @@
+using Ilumisoft.HealthSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,5 +37,15 @@ public class Boss : MonoBehaviour
     public void AparecePortal()
     {
         portal.SetActive(true);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        HP_Min -= damage; // Resta el daño a la salud del enemigo
+    }
+
+    public void DestruyeEnemigo()
+    {
+        Destroy(gameObject); // Destruye el GameObject del enemigo
     }
 }

@@ -20,6 +20,11 @@ public class Enemigo : MonoBehaviour
     [SerializeField] private float health; // Salud del enemigo
     [SerializeField] private GameObject dotEffect; // Prefab del efecto de daño por segundo (DOT) para mostrar visualmente el daño continuo
 
+    [SerializeField] private AudioSource audioSource; // Componente de audio para reproducir sonidos del enemigo
+    [SerializeField] private AudioClip[] ataques; // Sonido que se reproducirá al atacar
+    [SerializeField] private AudioClip muerte;
+    [SerializeField] private AudioClip hit;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -124,6 +129,7 @@ public class Enemigo : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage; // Resta el daño a la salud del enemigo
+        SonidoHit(); // Reproduce el sonido de impacto al recibir daño
         Debug.Log(health); // Imprime la salud actual del enemigo en la consola
     }
 
@@ -155,6 +161,27 @@ public class Enemigo : MonoBehaviour
             Destroy(e);
         }
             
+    }
+
+    public void SonidoAtaque()
+    {
+        int n = Random.Range(0,3);
+        audioSource.PlayOneShot(ataques[n]);
+    }
+
+    public void SonidoMuerte()
+    {
+        audioSource.PlayOneShot(muerte);
+    }
+
+    public void SonidoHit()
+        {
+            audioSource.PlayOneShot(hit);
+    }
+
+    public void DestruyeEnemigo()
+    {
+        Destroy(gameObject); // Destruye el objeto del enemigo
     }
     //private void OnTriggerEnter(Collider other)
     //{
