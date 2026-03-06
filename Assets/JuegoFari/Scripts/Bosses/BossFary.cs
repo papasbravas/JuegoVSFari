@@ -23,6 +23,14 @@ public class BossFary : Boss
 
     private bool apareciendo = true;
 
+    [SerializeField] private AudioSource AudioSource;
+    [SerializeField] private AudioClip ataque1;
+    [SerializeField] private AudioClip ataqueMagico;
+    [SerializeField] private AudioClip bloquea;
+    [SerializeField] private AudioClip aparece;
+    [SerializeField] private AudioClip muerte;
+
+
 
 
     //Comportamiento del boss
@@ -73,7 +81,6 @@ public class BossFary : Boss
                             animator.SetBool("run", false);
                             animator.SetBool("attack", true);
                             animator.SetFloat("skills", 0);
-                            
                         } 
                         
                         break;
@@ -92,8 +99,7 @@ public class BossFary : Boss
                         animator.SetBool("run", false);
                         animator.SetBool("attack", true);
                         animator.SetFloat("skills", 1f);
-                         
-                            break;
+                        break;
 
 
                 }
@@ -163,6 +169,31 @@ public class BossFary : Boss
     public void TerminaAparecer()
     {
         apareciendo = false;
+    }
+
+    public void SonidoAtaque1()
+    {
+        AudioSource.PlayOneShot(ataque1);
+    }
+
+    public void SonidoAtaqueMagico()
+    {
+        AudioSource.PlayOneShot(ataqueMagico);
+    }
+
+    public void SonidoBloquea()
+    {
+        AudioSource.PlayOneShot(bloquea);
+    }
+
+    public void SonidoAparece()
+    {
+        AudioSource.PlayOneShot(aparece);
+    }
+
+    public void SonidoMuerte()
+    {
+        AudioSource.PlayOneShot(muerte);
     }
 }
 

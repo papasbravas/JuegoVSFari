@@ -5,12 +5,29 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private float health; // Salud del enemigo
     private bool isStunned = false; // Indica si el enemigo está aturdido
+    private Animator animator; // Referencia al componente Animator del enemigo
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>(); // Obtiene la referencia al componente Animator del enemigo al iniciar el juego
+    }
 
     public void TakeDamage(float damage)
     {
         health -= damage; // Resta el daño a la salud del enemigo
+        if(health <= 0)
+        {
+            animator.SetTrigger("dead"); // Activa la animación de muerte del enemigo
+        }
         Debug.Log(health); // Imprime la salud actual del enemigo en la consola
     }
+
+    public void DestruyeEnemigo()
+    {
+        Destroy(gameObject); // Destruye el objeto del enemigo en la escena
+    }
+
+
 
 
     //public void ApplyStun(float duration)

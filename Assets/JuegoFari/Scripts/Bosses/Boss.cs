@@ -12,12 +12,18 @@ public class Boss : MonoBehaviour
     public Image barra;   //barra de vida
     public bool muerto;     //boss muerto
 
+    [SerializeField] private GameObject portal;
+
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         target = GameObject.Find("Player");
         //barra = GameObject.Find("BorderMask").GetComponent<Image>();
+        if (portal != null)
+        {
+            portal.SetActive(false);
+        }
     }
 
 
@@ -25,5 +31,10 @@ public class Boss : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void AparecePortal()
+    {
+        portal.SetActive(true);
     }
 }

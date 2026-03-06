@@ -28,6 +28,13 @@ public class BossCigala : Boss
     public GameObject cabeza;   //punto donde salen las esferas
     private float cronometro2;      //tiempo entre esferas
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip ataque1;
+    [SerializeField] private AudioClip ataque2;
+    [SerializeField] private AudioClip muerte;
+    [SerializeField] private AudioClip aparece;
+
+
 
 
     ///COMPORTAMIENTO DEL BOSS, SE LLAMA EN EL UPDATE//
@@ -192,5 +199,25 @@ public class BossCigala : Boss
                 //musica.enabled = false;
             }
         }
+    }
+
+    public void SonidoAparece()
+    {
+        audioSource.PlayOneShot(aparece);
+    }
+
+    public void SonidoAtaque1()
+    {
+        audioSource.PlayOneShot(ataque1);
+    }
+
+    public void SonidoAtaque2()
+    {
+        audioSource.PlayOneShot(ataque2);
+    }
+
+    public void SonidoMuerte()
+    {
+        audioSource.PlayOneShot(muerte);
     }
 }
