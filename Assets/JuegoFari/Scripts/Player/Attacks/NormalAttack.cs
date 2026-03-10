@@ -205,30 +205,43 @@ public class NormalAttack : MonoBehaviour
 
     IEnumerator SlowBossEffect()
     {
-        // Aqui hay que poner el codigo para ralentizar exclusivamente al jefe (por el tag supongo)
-        canUseSlowBoss = false; // Desactiva la habilidad de ralentizar al jefe hasta que se recargue
+        canUseSlowBoss = false;
 
-        GameObject boss = GameObject.FindGameObjectWithTag("Boss"); // Encuentra el objeto con el tag "Boss"
+        GameObject[] bosses = GameObject.FindGameObjectsWithTag("Boss");
 
-        // Debe de ralentizar al jefe independientemente de la distancia al mismo
-        if (boss != null)
+        if (bosses.Length > 0)
         {
-            // Enemigo bossScript = boss.GetComponent<Enemigo>(); // Obtiene el script del enemigo del jefe
-            // if(bossScript != null){
-            //     bossScript.ApplySlow(slowBossAmount, slowBossDuration); // Aplica el efecto de ralentización al jefe
-            //  
-            // if(slowBossEffect != null){
-            //     slowBossEffect.Play(); // Empieza el efecto visual de ralentización
-            //  Debug.Log("Jefe ralentizado por " + slowBossDuration + " segundos"); // Imprime un mensaje en la consola indicando que el jefe ha sido ralentizado
-            // }
+            foreach (GameObject boss in bosses)
+            {
+                Enemigo bossScript = boss.GetComponent<Enemigo>();
+
+                if (bossScript != null)
+                {
+                    bossScript.ApplySlow(slowBossAmount, slowBossDuration);
+                    Debug.Log("Jefe ralentizado: " + boss.name);
+                }
+                else
+                {
+                    Debug.LogWarning("El objeto con tag Boss no tiene componente Enemigo: " + boss.name);
+                }
+            }
+
+            if (slowBossEffect != null)
+            {
+                slowBossEffect.Play();
+            }
         }
         else
         {
-            Debug.Log("No se encontró el jefe para ralentizar"); // Imprime un mensaje en la consola indicando que no se encontró el jefe
+            Debug.Log("No se encontró ningún jefe para ralentizar");
         }
 
         yield return new WaitForSeconds(slowBossDuration);
-        canUseSlowBoss = true; // Permite que el jugador pueda usar la habilidad de ralentizar al jefe nuevamente
+
+        if (slowBossEffect != null)
+        {
+            slowBossEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
     }
 
     IEnumerator SlowBossCooldown()

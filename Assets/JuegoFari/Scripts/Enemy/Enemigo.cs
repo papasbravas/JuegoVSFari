@@ -3,8 +3,13 @@ using UnityEngine;
 
 public class Enemigo : MonoBehaviour
 {
-    [SerializeField] protected int velocidad = 1;
-    [SerializeField] protected int velocidadPersecucion = 3;
+    [SerializeField] protected float velocidad = 1f;
+    [SerializeField] protected float velocidadPersecucion = 3f;
+    private float velocidadOriginal;
+    private float velocidadPersecucionOriginal;
+    private Coroutine slowCoroutine;
+    private bool isSlowed = false;
+
     public int rutina;
     public float cronometro;
     public Animator animator;
@@ -31,7 +36,9 @@ public class Enemigo : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         target = GameObject.Find("Player");
-        
+
+        velocidadOriginal = velocidad;
+        velocidadPersecucionOriginal = velocidadPersecucion;
     }
 
     // Update is called once per frame
@@ -115,6 +122,36 @@ public class Enemigo : MonoBehaviour
         {
             StartCoroutine(StunEffect(duration)); // Inicia la corrutina para el efecto de aturdimiento
         }
+    }
+
+    public void ApplySlow(float slowMultiplier, float duration)
+    {
+        if (slowCoroutine != null)
+        {
+            StopCoroutine(slowCoroutine);
+        }
+
+        slowCoroutine = StartCoroutine(SlowEffect(slowMultiplier, duration));
+    }
+
+    private IEnumerator SlowEffect(float slowMultiplier, float duration)
+    {
+        isSlowed = true;
+
+        velocidad = velocidadOriginal * slowMultiplier;
+        velocidadPersecucion = velocidadPersecucionOriginal * slowMultiplier;
+
+        Debug.Log(gameObject.name + " ralentizado x" + slowMultiplier + " durante " + duration + " segundos");
+
+        yield return new WaitForSeconds(duration);
+
+        velocidad = velocidadOriginal;
+        velocidadPersecucion = velocidadPersecucionOriginal;
+
+        isSlowed = false;
+        slowCoroutine = null;
+
+        Debug.Log(gameObject.name + " recuperó su velocidad normal");
     }
 
     IEnumerator StunEffect(float duration)
