@@ -51,8 +51,33 @@ public class TutorialManager : MonoBehaviour
                 // Invencibilidad
                 if(Input.GetKeyDown(KeyCode.Alpha2))
                 {
-                    Fin();
+                    SiguientePaso();
                 }
+                break;
+            case 5:
+                // Defensa
+                if (Input.GetKeyDown(KeyCode.Alpha3))
+                {
+                    SiguientePaso();
+                }
+                break;
+            case 6:
+                // Ralentizar jefes
+                if (Input.GetKeyDown(KeyCode.Alpha4))
+                {
+                    SiguientePaso();
+                }
+                break;
+            case 7:
+                // Daño progresivo
+                if (Input.GetKeyDown(KeyCode.Alpha5))
+                {
+                    SiguientePaso();
+                }
+                break;
+             case 8:
+                // Fin del tutorial
+                Fin();
                 break;
         }
     }
@@ -74,7 +99,19 @@ public class TutorialManager : MonoBehaviour
                 textoTuto.text = "Presiona el 1 para aturdir a los enemigos cercanos.";
                 break;
             case 4:
-                textoTuto.text ="Presiona el 2 para volverte invencible durante un tiempo.";
+                textoTuto.text = "Presiona el 2 para volverte invencible durante un tiempo.";
+                break;
+            case 5:
+                textoTuto.text = "Presiona el 3 para activar tu defensa y reducir el daño recibido.";
+                break;
+            case 6:
+                textoTuto.text = "Presiona el 4 para ralentizar a los jefes.";
+                break;
+            case 7:
+                textoTuto.text = "Presiona el 5 para hacer daño progresivo.";
+                break;
+            case 8:
+                textoTuto.text = "¡Eso es todo! ¡Buena suerte en tu aventura!";
                 break;
         }
     }

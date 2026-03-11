@@ -585,7 +585,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -1898,7 +1898,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -2454,7 +2454,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -3768,7 +3768,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -6.5205994, y: 0.00012207031}
+  m_AnchoredPosition: {x: -6.52063, y: 0.00012207031}
   m_SizeDelta: {x: 13.0412, y: 19.5618}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1469874418
@@ -4312,9 +4312,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1622195873}
     - target: {fileID: 6586937633616264632, guid: 0a9a444c6421d0b4e98a44f80bdec62c, type: 3}
+      propertyPath: imageSlowBoss
+      value: 
+      objectReference: {fileID: 296022899}
+    - target: {fileID: 6586937633616264632, guid: 0a9a444c6421d0b4e98a44f80bdec62c, type: 3}
       propertyPath: imageInvincible
       value: 
       objectReference: {fileID: 1059150633}
+    - target: {fileID: 6586937633616264632, guid: 0a9a444c6421d0b4e98a44f80bdec62c, type: 3}
+      propertyPath: imageDefenseBuff
+      value: 
+      objectReference: {fileID: 1024803981}
+    - target: {fileID: 6586937633616264632, guid: 0a9a444c6421d0b4e98a44f80bdec62c, type: 3}
+      propertyPath: imageDamageOverTime
+      value: 
+      objectReference: {fileID: 877414253}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
