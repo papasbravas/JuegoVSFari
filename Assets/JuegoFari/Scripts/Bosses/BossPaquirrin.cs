@@ -20,6 +20,14 @@ public class BossPaquirrin : Boss
     public GameObject prefabMiniom;
     private List<GameObject> listaMinioms;
 
+    [Header("Sonidos")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip audioAtaqueMelee;
+    [SerializeField] private AudioClip audioInvocacion;
+    [SerializeField] private AudioClip audioCura;
+    [SerializeField] private AudioClip audioAparece;
+    [SerializeField] private AudioClip audioMuere;
+
 
     public bool curando = false;
     public bool invocando = false;
@@ -188,5 +196,32 @@ public class BossPaquirrin : Boss
             }
         }
     }
+
+    public void SonidoMelee()
+    {
+        audioSource.PlayOneShot(audioAtaqueMelee);
+    }
+
+    public void SonidoInvocacion()
+    {
+        audioSource.PlayOneShot(audioInvocacion);
+    }
+
+    public void SonidoCura()
+    {
+        audioSource.PlayOneShot(audioCura);
+    }
+
+    public void SonidoAparece()
+    {
+        audioSource.PlayOneShot(audioAparece);
+    }
+
+    public void SonidoMuerte()
+    {
+        audioSource.PlayOneShot(audioMuere);
+    }
+    
+
 }
 

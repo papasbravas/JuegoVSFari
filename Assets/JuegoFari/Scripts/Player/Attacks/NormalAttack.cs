@@ -14,8 +14,8 @@ public class NormalAttack : MonoBehaviour
     [SerializeField] private AudioSource sfxSource;   // AudioSource SOLO para efectos
     [SerializeField] private float sfxVolume = 1f;
 
-    [SerializeField] private AudioClip sfxSingleAttack;
-    [SerializeField] private AudioClip sfxMultiAttack;
+    [SerializeField] private AudioClip[] sfxSingleAttack;
+    [SerializeField] private AudioClip[] sfxMultiAttack;
     [SerializeField] private AudioClip sfxStun;
     [SerializeField] private AudioClip sfxInvincibleOn;
     [SerializeField] private AudioClip sfxInvincibleOff;
@@ -80,7 +80,8 @@ public class NormalAttack : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("Ataque normal activado");
-            PlaySFX(sfxSingleAttack);
+            int n = Random.Range(0, sfxSingleAttack.Length); // Selecciona un clip aleatorio de ataque normal
+            PlaySFX(sfxSingleAttack[n]);
             // anima.SetTrigger("attack"); // Activa la animación de ataque
             singleAttack();
         }
@@ -88,7 +89,8 @@ public class NormalAttack : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             Debug.Log("Animación de ataque múltiple activada");
-            PlaySFX(sfxMultiAttack);
+            int n = Random.Range(0, sfxMultiAttack.Length); // Selecciona un clip aleatorio de ataque múltiple
+            PlaySFX(sfxMultiAttack[n]);
             //anima.SetTrigger("attackMulti"); // Activa la animación de ataque múltiple
             multipleAttack();
         }

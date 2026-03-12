@@ -10980,6 +10980,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1636423051573423061, guid: 31771c22e5d853f4f8df349d765d3605, type: 3}
+      propertyPath: sfxSource
+      value: 
+      objectReference: {fileID: 1861977889}
+    - target: {fileID: 1636423051573423061, guid: 31771c22e5d853f4f8df349d765d3605, type: 3}
       propertyPath: sfxDefenseOn
       value: 
       objectReference: {fileID: 8300000, guid: c6cfa53fee9321040bf896b7468332a0, type: 3}
@@ -11011,6 +11015,38 @@ PrefabInstance:
       propertyPath: imageDamageOverTime
       value: 
       objectReference: {fileID: 1850586983}
+    - target: {fileID: 1636423051573423061, guid: 31771c22e5d853f4f8df349d765d3605, type: 3}
+      propertyPath: sfxMultiAttack.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1636423051573423061, guid: 31771c22e5d853f4f8df349d765d3605, type: 3}
+      propertyPath: sfxSingleAttack.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1636423051573423061, guid: 31771c22e5d853f4f8df349d765d3605, type: 3}
+      propertyPath: 'sfxMultiAttack.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: ae2e62f0d460bb84c9a10ae9a708264c, type: 3}
+    - target: {fileID: 1636423051573423061, guid: 31771c22e5d853f4f8df349d765d3605, type: 3}
+      propertyPath: 'sfxMultiAttack.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 8855f19f89ef0f048b4a9d92342912be, type: 3}
+    - target: {fileID: 1636423051573423061, guid: 31771c22e5d853f4f8df349d765d3605, type: 3}
+      propertyPath: 'sfxMultiAttack.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: d3d31a5516c40014887d8f900983abbc, type: 3}
+    - target: {fileID: 1636423051573423061, guid: 31771c22e5d853f4f8df349d765d3605, type: 3}
+      propertyPath: 'sfxSingleAttack.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 8acc47c1328106a47b7234a26725b83d, type: 3}
+    - target: {fileID: 1636423051573423061, guid: 31771c22e5d853f4f8df349d765d3605, type: 3}
+      propertyPath: 'sfxSingleAttack.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: fecfa18069bc7f442a79a778436c2b7f, type: 3}
+    - target: {fileID: 1636423051573423061, guid: 31771c22e5d853f4f8df349d765d3605, type: 3}
+      propertyPath: 'sfxSingleAttack.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a8fd0872969a76c4e916ec48486fd6c9, type: 3}
     - target: {fileID: 2634657088895619822, guid: 31771c22e5d853f4f8df349d765d3605, type: 3}
       propertyPath: playOnAwake
       value: 0
@@ -13936,8 +13972,10 @@ MonoBehaviour:
   attackHitboxMulti: {fileID: 0}
   sfxSource: {fileID: 0}
   sfxVolume: 1
-  sfxSingleAttack: {fileID: 0}
-  sfxMultiAttack: {fileID: 0}
+  sfxSingleAttack:
+  - {fileID: 0}
+  sfxMultiAttack:
+  - {fileID: 0}
   sfxStun: {fileID: 0}
   sfxInvincibleOn: {fileID: 0}
   sfxInvincibleOff: {fileID: 0}
