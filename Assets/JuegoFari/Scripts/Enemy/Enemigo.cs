@@ -139,7 +139,13 @@ public class Enemigo : MonoBehaviour
     {
         health -= damage; // Resta el daño a la salud del enemigo
         SonidoHit(); // Reproduce el sonido de impacto al recibir daño
-        Debug.Log(health); // Imprime la salud actual del enemigo en la consola
+        //Debug.Log(health); // Imprime la salud actual del enemigo en la consola
+        if(health <= 0)
+        {
+            animator.SetTrigger("dead"); // Activa la animación de muerte del enemigo
+            SonidoMuerte(); // Reproduce el sonido de muerte al morir el enemigo
+        }
+
     }
 
     public void ApplyDamageOverTime(float damagePerSecond, float duration)

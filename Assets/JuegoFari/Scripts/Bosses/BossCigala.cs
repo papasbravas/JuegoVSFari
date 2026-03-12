@@ -28,6 +28,7 @@ public class BossCigala : Boss
     public GameObject cabeza;   //punto donde salen las esferas
     private float cronometro2;      //tiempo entre esferas
 
+    [Header("Sonidos")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip ataque1;
     [SerializeField] private AudioClip ataque2;
