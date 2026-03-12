@@ -49,7 +49,7 @@ public class NormalAttack : MonoBehaviour
 
     [Header("Habilidad 4: Ralentizar jefe")]
     [SerializeField] public float slowBossDuration = 5f; // Duración del efecto de ralentización en el jefe
-    [SerializeField] public float slowBossAmount = 0.5f; // Cantidad de ralentización
+    [SerializeField] public int slowBossAmount = 2; // Cantidad de ralentización
     [SerializeField] public bool canUseSlowBoss = true; // Indica si el jugador puede usar la habilidad de ralentizar al jefe
     [SerializeField] public float slowBossCooldown = 20f; // Tiempo de recarga de la habilidad de ralentizar al jefe
     [SerializeField] public Image imageSlowBoss; // Imagen del botón de ralentizar al jefe en el HUD
@@ -213,7 +213,7 @@ public class NormalAttack : MonoBehaviour
         {
             foreach (GameObject boss in bosses)
             {
-                Enemigo bossScript = boss.GetComponent<Enemigo>();
+                Boss bossScript = boss.GetComponent<Boss>();
 
                 if (bossScript != null)
                 {
