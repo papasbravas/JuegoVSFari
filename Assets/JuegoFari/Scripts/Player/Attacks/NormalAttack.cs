@@ -165,13 +165,23 @@ public class NormalAttack : MonoBehaviour
 
         foreach (Collider hit in hits)
         {
-            if (hit.CompareTag("Enemy"))
+            if (hit.CompareTag("Enemy")) 
             {
                 Enemigo enemy = hit.GetComponent<Enemigo>();
                 if (enemy != null)
                 {
                     enemy.ApplyDamageOverTime(damageOverTimeAmount, damageOverTimeDuration);
                     Debug.Log("Aplicando daño progresivo a: " + hit.name);
+                }
+            }
+
+            if (hit.CompareTag("Boss"))
+            {
+                Boss boss = hit.GetComponent<Boss>();
+                if (boss != null)
+                {
+                    boss.ApplyDamageOverTime(damageOverTimeAmount, damageOverTimeDuration);
+                    Debug.Log("Aplicando daño progresivo al jefe: " + hit.name);
                 }
             }
         }
