@@ -27,12 +27,17 @@ public class Boss : MonoBehaviour
         }
     }
 
-
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(float damage)
     {
-        
+        HP_Min -= damage; // Resta el daño a la salud del enemigo
+        if (HP_Min <= 0)
+        {
+            animator.SetTrigger("dead"); // Activa la animación de muerte del enemigo
+
+        }
+        Debug.Log(HP_Min); // Imprime la salud actual del enemigo en la consola
     }
+
 
     public void AparecePortal()
     {

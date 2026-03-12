@@ -15,5 +15,11 @@ public class DealDamage : MonoBehaviour
         {
             other.GetComponent<Boss>().TakeDamage(damage);
         }
+        else if (other.CompareTag("Boss"))
+        {
+            Boss boss = other.GetComponent<Boss>(); // Obtiene el componente HealthSystem del jefe
+            Debug.Log("Golpeado: " + other.name); // Imprime el nombre del jefe golpeado en la consola
+            boss.TakeDamage(damage); // Llama al método TakeDamage del jefe para infligir daño
+        }
     }
 }

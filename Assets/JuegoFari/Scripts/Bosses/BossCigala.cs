@@ -220,4 +220,9 @@ public class BossCigala : Boss
     {
         audioSource.PlayOneShot(muerte);
     }
+
+    public void DestruyeEnemigo()
+    {
+        Destroy(gameObject);
+    }
 }

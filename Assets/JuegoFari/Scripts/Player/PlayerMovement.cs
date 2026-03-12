@@ -25,17 +25,19 @@ public class PlayerMovement : MonoBehaviour
     private bool jumpRequested = false; // Indica si se ha solicitado un salto
 
     [SerializeField] private AudioSource salto; // Sonido de salto
-    [SerializeField] private AudioSource pasos; // Sonido de pasos
+    [SerializeField] private AudioSource pasosSource; // Sonido de pasos
+    [SerializeField] private AudioClip[] Pasos; // Clip de sonido
+
     [SerializeField] private int minSpeedSound = 1; // Velocidad mínima para reproducir el sonido de pasos
 
-    [SerializeField] private Animator animator; // Referencia al componente Animator
+    //[SerializeField] private Animator animator; // Referencia al componente Animator
 
     private bool isGrounded; // Variable para verificar si el jugador está en el suelo
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        animator = GetComponent<Animator>(); // Obtener el componente Animator
+        //animator = GetComponent<Animator>(); // Obtener el componente Animator
         characterController = GetComponent<CharacterController>(); // Obtener el componente CharacterController
     }
 
@@ -72,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void SonidoPasos() // Reproducir sonido de pasos al moverse
     {
-        if (pasos == null)
+        if (pasosSource == null)
         {
             return;
         }
@@ -82,13 +84,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (andando)
         {
-            if (!pasos.isPlaying) // Reproducir el sonido de pasos si no se está reproduciendo
+            if (!pasosSource.isPlaying) // Reproducir el sonido de pasos si no se está reproduciendo
             {
-                pasos.Play();
-            }
-            else if (pasos.isPlaying) // Detener el sonido de pasos si no se está moviendo
-            {
-                pasos.Stop();
+                int n = UnityEngine.Random.Range(1, Pasos.Length); // Seleccionar un clip de sonido aleatorio (excluyendo el primer clip)
+                pasosSource.clip = Pasos[n]; // Asignar el clip de sonido seleccionado al AudioSource
+                pasosSource.Play();
             }
         }
     }
@@ -136,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 salto.Play();
             }
-            animator.SetTrigger("Saltar"); // Activar la animación de salto
+            //animator.SetTrigger("Saltar"); // Activar la animación de salto
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity); // Calcular la velocidad vertical para el salto
             jumpRequested = false; // Resetear la solicitud de salto
         }
