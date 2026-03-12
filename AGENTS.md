@@ -2,7 +2,7 @@
 - Project name: JuegoFari
 - Unity version: Unity 6000.3.3f1
 - Active game object:
-  - Name: Big Vegas@Bboy Hip Hop Move
-  - Tag: Untagged
+  - Name: Fary
+  - Tag: Boss
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

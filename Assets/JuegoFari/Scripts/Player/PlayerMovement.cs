@@ -28,14 +28,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioSource pasos; // Sonido de pasos
     [SerializeField] private int minSpeedSound = 1; // Velocidad mínima para reproducir el sonido de pasos
 
-    [SerializeField] private Animator animator; // Referencia al componente Animator
+    //[SerializeField] private Animator animator; // Referencia al componente Animator
 
     private bool isGrounded; // Variable para verificar si el jugador está en el suelo
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        animator = GetComponent<Animator>(); // Obtener el componente Animator
+        //animator = GetComponent<Animator>(); // Obtener el componente Animator
         characterController = GetComponent<CharacterController>(); // Obtener el componente CharacterController
     }
 
@@ -136,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 salto.Play();
             }
-            animator.SetTrigger("Saltar"); // Activar la animación de salto
+            //animator.SetTrigger("Saltar"); // Activar la animación de salto
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity); // Calcular la velocidad vertical para el salto
             jumpRequested = false; // Resetear la solicitud de salto
         }

@@ -124,35 +124,7 @@ public class Enemigo : MonoBehaviour
         }
     }
 
-    public void ApplySlow(float slowMultiplier, float duration)
-    {
-        if (slowCoroutine != null)
-        {
-            StopCoroutine(slowCoroutine);
-        }
-
-        slowCoroutine = StartCoroutine(SlowEffect(slowMultiplier, duration));
-    }
-
-    private IEnumerator SlowEffect(float slowMultiplier, float duration)
-    {
-        isSlowed = true;
-
-        velocidad = velocidadOriginal * slowMultiplier;
-        velocidadPersecucion = velocidadPersecucionOriginal * slowMultiplier;
-
-        Debug.Log(gameObject.name + " ralentizado x" + slowMultiplier + " durante " + duration + " segundos");
-
-        yield return new WaitForSeconds(duration);
-
-        velocidad = velocidadOriginal;
-        velocidadPersecucion = velocidadPersecucionOriginal;
-
-        isSlowed = false;
-        slowCoroutine = null;
-
-        Debug.Log(gameObject.name + " recuperó su velocidad normal");
-    }
+    
 
     IEnumerator StunEffect(float duration)
     {
