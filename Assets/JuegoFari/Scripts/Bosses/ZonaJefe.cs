@@ -5,7 +5,6 @@ public class ZonaJefe : MonoBehaviour
 {
     public GameObject muros;    // Referencia a los muros que se activarán al entrar en la zona del jefe
     public GameObject jefe;     // Referencia al jefe que se activará al entrar en la zona del jefe
-    public AudioSource musicaBoss; // Referencia al AudioSource que reproducirá la música del jefe
     private bool jefeActivado = false; // Variable para asegurarse de que el jefe solo se active una vez
     public GameObject BarraVidaJefe;
 
