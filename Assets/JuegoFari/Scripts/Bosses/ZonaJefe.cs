@@ -18,7 +18,7 @@ public class ZonaJefe : MonoBehaviour
         muros.SetActive(true); // Activa los muros para bloquear la salida
         if (!jefeActivado)
         {
-            BarraVidaJefe.SetActive(true); // Activa la barra de vida del jefe
+            BarraVidaJefe.SetActive(true); // Activa la barra de vida del jefe 
             jefe.SetActive(true); // Activa el jefe para que aparezca en la escena
             //Instantiate(Jefe, new Vector3(posJefe.position.x, posJefe.position.y, posJefe.position.z), Quaternion.identity); // Instancia el jefe en la posición de la zona del jefe
             jefeActivado = true; // Marca que el jefe ha sido activado

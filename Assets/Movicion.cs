@@ -90,7 +90,6 @@ public class Movicion : MonoBehaviour
                 pasosSource.clip = Pasos[n]; // Asignar el clip de sonido seleccionado al AudioSource
                 pasosSource.Play();
             }
-            
         }
     }
 

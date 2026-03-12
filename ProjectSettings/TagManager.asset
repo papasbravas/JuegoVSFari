@@ -9,6 +9,7 @@ TagManager:
   - Ataque
   - Invencible
   - Paquirrin
+  - Boss
   layers:
   - Default
   - TransparentFX
