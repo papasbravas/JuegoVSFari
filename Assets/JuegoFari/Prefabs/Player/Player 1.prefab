@@ -72,6 +72,15 @@ MonoBehaviour:
   multiDamage: 5
   attackHitboxSingle: {fileID: 0}
   attackHitboxMulti: {fileID: 0}
+  sfxSource: {fileID: 0}
+  sfxVolume: 1
+  sfxSingleAttack: {fileID: 0}
+  sfxMultiAttack: {fileID: 0}
+  sfxStun: {fileID: 0}
+  sfxInvincibleOn: {fileID: 0}
+  sfxInvincibleOff: {fileID: 0}
+  sfxDefenseOn: {fileID: 0}
+  sfxDefenseOff: {fileID: 0}
   imageStun: {fileID: 0}
   stunRadius: 5
   stunDuration: 2
@@ -90,6 +99,18 @@ MonoBehaviour:
   defenseBuffCooldown: 15
   imageDefenseBuff: {fileID: 0}
   defenseBuffEffect: {fileID: 0}
+  slowBossDuration: 5
+  slowBossAmount: 2
+  canUseSlowBoss: 1
+  slowBossCooldown: 20
+  imageSlowBoss: {fileID: 0}
+  slowBossEffect: {fileID: 0}
+  damageOverTimeDuration: 5
+  damageOverTimeAmount: 2
+  canUseDamageOverTime: 1
+  damageOverTimeCooldown: 12
+  imageDamageOverTime: {fileID: 0}
+  damageOverTimeRadius: 5
 --- !u!114 &1547502303867749900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,7 +399,6 @@ GameObject:
   - component: {fileID: 4447738400237661275}
   - component: {fileID: 5879649886865946374}
   - component: {fileID: 8057805973944999682}
-  - component: {fileID: 5637611489061660737}
   - component: {fileID: 6635098955945178327}
   - component: {fileID: 3942686162455574235}
   - component: {fileID: 1636423051573423061}
@@ -509,9 +529,9 @@ MonoBehaviour:
   sprintKey: 304
   moveInput: {x: 0, y: 0}
   salto: {fileID: 0}
-  pasos: {fileID: 0}
+  pasosSource: {fileID: 0}
+  Pasos: []
   minSpeedSound: 1
-  animator: {fileID: 0}
 --- !u!114 &4447738400237661275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,28 +605,6 @@ MonoBehaviour:
   maxPitch: 30
   playerInput: {fileID: 0}
   delaySeconds: 2
---- !u!95 &5637611489061660737
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8177746862764309079}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!54 &6635098955945178327
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -648,6 +646,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 100
   isInvincible: 0
+  hasDefenseBuff: 0
+  defenseMultiplier: 0.5
 --- !u!114 &1636423051573423061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,6 +664,15 @@ MonoBehaviour:
   multiDamage: 5
   attackHitboxSingle: {fileID: 3536231970537437949}
   attackHitboxMulti: {fileID: 7509304841056141659}
+  sfxSource: {fileID: 0}
+  sfxVolume: 1
+  sfxSingleAttack: {fileID: 0}
+  sfxMultiAttack: {fileID: 0}
+  sfxStun: {fileID: 0}
+  sfxInvincibleOn: {fileID: 0}
+  sfxInvincibleOff: {fileID: 0}
+  sfxDefenseOn: {fileID: 0}
+  sfxDefenseOff: {fileID: 0}
   imageStun: {fileID: 0}
   stunRadius: 5
   stunDuration: 3
@@ -682,6 +691,18 @@ MonoBehaviour:
   defenseBuffCooldown: 15
   imageDefenseBuff: {fileID: 0}
   defenseBuffEffect: {fileID: 0}
+  slowBossDuration: 5
+  slowBossAmount: 2
+  canUseSlowBoss: 1
+  slowBossCooldown: 20
+  imageSlowBoss: {fileID: 0}
+  slowBossEffect: {fileID: 0}
+  damageOverTimeDuration: 5
+  damageOverTimeAmount: 2
+  canUseDamageOverTime: 1
+  damageOverTimeCooldown: 12
+  imageDamageOverTime: {fileID: 0}
+  damageOverTimeRadius: 5
 --- !u!1001 &1886453475197458974
 PrefabInstance:
   m_ObjectHideFlags: 0

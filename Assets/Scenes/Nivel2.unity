@@ -1341,6 +1341,25 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22d18bd8a58737940a3d095c6118be7e, type: 3}
+--- !u!1 &40882432 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6092109444650849221, guid: f7d3d250b81ac1646a7428edc2bd07d1, type: 3}
+  m_PrefabInstance: {fileID: 5791883192395274148}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &40882436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40882432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 422fc70a5e4a65e448135da9c376ddbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicZoneByName
+  zoneNameToTrigger: ZonaJefe
+  bossMusicOnEnter: 1
 --- !u!1001 &47684620
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7329,7 +7348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7b6ab8b71a19284b986fcf37443a814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HUDHealth
-  barra: {fileID: 2153504306542405208}
+  barra: {fileID: 0}
 --- !u!114 &302916580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10961,17 +10980,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5637611489061660737, guid: 31771c22e5d853f4f8df349d765d3605, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8177746862764309079, guid: 31771c22e5d853f4f8df349d765d3605, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1861977890}
-    - targetCorrespondingSourceObject: {fileID: 8177746862764309079, guid: 31771c22e5d853f4f8df349d765d3605, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1861977904}
     - targetCorrespondingSourceObject: {fileID: 8177746862764309079, guid: 31771c22e5d853f4f8df349d765d3605, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1861977889}
@@ -13778,6 +13793,18 @@ MonoBehaviour:
   defenseBuffCooldown: 15
   imageDefenseBuff: {fileID: 0}
   defenseBuffEffect: {fileID: 0}
+  slowBossDuration: 5
+  slowBossAmount: 2
+  canUseSlowBoss: 1
+  slowBossCooldown: 20
+  imageSlowBoss: {fileID: 0}
+  slowBossEffect: {fileID: 0}
+  damageOverTimeDuration: 5
+  damageOverTimeAmount: 2
+  canUseDamageOverTime: 1
+  damageOverTimeCooldown: 12
+  imageDamageOverTime: {fileID: 0}
+  damageOverTimeRadius: 5
 --- !u!114 &575742239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43066,32 +43093,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1861977904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1861977888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45ddb8cd7ec310741a2dc534dec61f90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Movicion
-  moveSpeed: 5
-  sprintMultiplier: 2
-  jumpHeight: 2
-  gravity: -9.81
-  jumpKey: 32
-  sprintKey: 304
-  moveInput: {x: 0, y: 0}
-  salto: {fileID: 1861977889}
-  pasosSource: {fileID: 1861977903}
-  Pasos:
-  - {fileID: 8300000, guid: 3bd1b93317b7a3a49b13011cdaa64d0b, type: 3}
-  - {fileID: 8300000, guid: 7b4b6eb734482064c8c1e5fd45d4d76c, type: 3}
-  - {fileID: 8300000, guid: fba95cafa5bba8649a7d269656e7317b, type: 3}
-  minSpeedSound: 1
 --- !u!1001 &1867269554
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49791,17 +49792,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c486f95b4a7cd38428ae6c956d5f896c, type: 3}
---- !u!114 &2153504306542405208 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8394842648403473607, guid: 4aa4e7290f66c1245855eb71564640ef, type: 3}
-  m_PrefabInstance: {fileID: 4836373386794174790}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4089105903745081515 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3573124592680807247, guid: d6ba8962a49a4d24c8a12f283eaf05d6, type: 3}
@@ -49982,7 +49972,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6092109444650849221, guid: f7d3d250b81ac1646a7428edc2bd07d1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 40882436}
   m_SourcePrefab: {fileID: 100100000, guid: f7d3d250b81ac1646a7428edc2bd07d1, type: 3}
 --- !u!224 &7020375673638029120 stripped
 RectTransform:

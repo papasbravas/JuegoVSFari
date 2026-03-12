@@ -53,10 +53,10 @@ public class Boss : MonoBehaviour
         portal.SetActive(true);
     }
 
-    public void TakeDamage(float damage)
-    {
-        HP_Min -= damage; // Resta el daño a la salud del enemigo
-    }
+    //public void TakeDamage(float damage)
+    //{
+    //    HP_Min -= damage; // Resta el daño a la salud del enemigo
+    //}
 
     public void DestruyeEnemigo()
     {
