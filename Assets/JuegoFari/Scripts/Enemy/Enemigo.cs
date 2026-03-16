@@ -159,9 +159,10 @@ public class Enemigo : MonoBehaviour
         GameObject e = null;
         if (dotEffect != null)
         {
-            //dotEffect.SetActive(true);
+            dotEffect.SetActive(true);
             Debug.Log("Hola efecto");
-             e = Instantiate(dotEffect, transform.position, Quaternion.identity); // Instancia el efecto de daño por segundo en la posición del enemigo y lo hace hijo del enemigo para que siga su movimiento
+
+            //e = Instantiate(dotEffect, transform.position, Quaternion.identity); // Instancia el efecto de daño por segundo en la posición del enemigo y lo hace hijo del enemigo para que siga su movimiento
         }
         while (elapsed < duration)
         {
@@ -173,7 +174,8 @@ public class Enemigo : MonoBehaviour
         if (dotEffect != null)
         {
             Debug.Log("Adios efecto");
-            Destroy(e);
+            //Destroy(e);
+            dotEffect.SetActive(false);
         }
             
     }

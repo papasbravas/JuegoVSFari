@@ -67,6 +67,77 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyCollider
   damage: 10
+--- !u!1001 &3792959161720521771
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7185238159824837046}
+    m_Modifications:
+    - target: {fileID: 6979569838253870222, guid: a1cd03e99a4cd0241ada118bbcc84ad5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.08153057
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979569838253870222, guid: a1cd03e99a4cd0241ada118bbcc84ad5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.79576
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979569838253870222, guid: a1cd03e99a4cd0241ada118bbcc84ad5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.49330997
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979569838253870222, guid: a1cd03e99a4cd0241ada118bbcc84ad5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979569838253870222, guid: a1cd03e99a4cd0241ada118bbcc84ad5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979569838253870222, guid: a1cd03e99a4cd0241ada118bbcc84ad5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979569838253870222, guid: a1cd03e99a4cd0241ada118bbcc84ad5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979569838253870222, guid: a1cd03e99a4cd0241ada118bbcc84ad5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979569838253870222, guid: a1cd03e99a4cd0241ada118bbcc84ad5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6979569838253870222, guid: a1cd03e99a4cd0241ada118bbcc84ad5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7853587546628051803, guid: a1cd03e99a4cd0241ada118bbcc84ad5, type: 3}
+      propertyPath: m_Name
+      value: Debuff
+      objectReference: {fileID: 0}
+    - target: {fileID: 7853587546628051803, guid: a1cd03e99a4cd0241ada118bbcc84ad5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a1cd03e99a4cd0241ada118bbcc84ad5, type: 3}
+--- !u!4 &6088626500826646693 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6979569838253870222, guid: a1cd03e99a4cd0241ada118bbcc84ad5, type: 3}
+  m_PrefabInstance: {fileID: 3792959161720521771}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6367738035837605744 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7853587546628051803, guid: a1cd03e99a4cd0241ada118bbcc84ad5, type: 3}
+  m_PrefabInstance: {fileID: 3792959161720521771}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7223106900992048733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2177,6 +2248,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 29d4a9de9638abc44836e7dd50332bb0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3063598567615512409}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 29d4a9de9638abc44836e7dd50332bb0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6088626500826646693}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 29d4a9de9638abc44836e7dd50332bb0, type: 3}
       insertIndex: -1
@@ -2270,7 +2344,7 @@ MonoBehaviour:
   target: {fileID: 0}
   isStunned: 0
   health: 100
-  dotEffect: {fileID: 7853587546628051803, guid: a1cd03e99a4cd0241ada118bbcc84ad5, type: 3}
+  dotEffect: {fileID: 6367738035837605744}
   audioSource: {fileID: 276482587039667720}
   ataques:
   - {fileID: 8300000, guid: 160fdb708b67b05499c4006d10440d65, type: 3}

@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +30,9 @@ public class BossFary : Boss
     [SerializeField] private AudioClip bloquea;
     [SerializeField] private AudioClip aparece;
     [SerializeField] private AudioClip muerte;
+
+    [SerializeField] public GameObject elvis;
+    [SerializeField] public GameObject txtVictoria;
 
 
 
@@ -194,6 +198,12 @@ public class BossFary : Boss
     public void SonidoMuerte()
     {
         AudioSource.PlayOneShot(muerte);
+    }
+
+    public void SaleElvis()
+    {
+        elvis.SetActive(true);
+        txtVictoria.SetActive(true);
     }
 }
 
