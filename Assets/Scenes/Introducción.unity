@@ -1153,7 +1153,6 @@ GameObject:
   - component: {fileID: 622609173}
   - component: {fileID: 622609172}
   - component: {fileID: 622609171}
-  - component: {fileID: 622609170}
   m_Layer: 5
   m_Name: HUDVida
   m_TagString: Untagged
@@ -1180,19 +1179,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &622609170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 622609168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7b6ab8b71a19284b986fcf37443a814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HUDHealth
-  barra: {fileID: 0}
 --- !u!114 &622609171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4139,6 +4125,10 @@ PrefabInstance:
     - target: {fileID: 1135034426165375963, guid: 0a9a444c6421d0b4e98a44f80bdec62c, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806489433369445041, guid: 0a9a444c6421d0b4e98a44f80bdec62c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2172168751070088973, guid: 0a9a444c6421d0b4e98a44f80bdec62c, type: 3}
       propertyPath: m_IsActive
